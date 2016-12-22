@@ -1,0 +1,12 @@
+
+<% if current_user %>
+<h3>Hoşgeldiniz</h3>
+ <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-info') %>
+<% else %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <h1>Welcome</h1>
+    <%= link_to 'Login', new_user_session_path, class: 'btn btn-lg btn-success btn-block' %>
+  </div>
+</div>
+<% end %>

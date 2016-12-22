@@ -1,0 +1,116 @@
+<% if current_user %>
+
+<% @cats.each do |cat| %>
+
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%=link_to cat , class: "cat-panel-link"  do %>
+      <div class="panel panel-default cat-panel main-panel" >
+        <!-- <div class="panel-heading">
+          <h3 class="panel-title"><%= cat.name + " - " + cat.location.city_and_country %></h3>
+        </div> -->
+        <div class="panel-body cat-panel-body">
+            <div class="col-md-6 col-md-offset-3">
+              <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="cat-picture img-responsive img-circle ">
+            </div>
+            <div class="col-md-12 text-center">
+              <h3> <%= cat.name + " - " + cat.location.city_and_country %> </h3>
+              <div class="h-divider"></div>
+              <h4> <label class="control-label">Type: </label> <%= cat.cat_type.name %>   </h4>
+              <h4> <label class="control-label">Age: </label> <%= cat.age %> </h4>
+              <h4> <label class="control-label">Gender: </label> <%= cat.show_gender %> </h4>
+            </div>
+          </div>
+            <!-- <div class="panel-footer cat-panel-footer text-center">
+                <%= link_to 'See Profile' , cat , class: "btn btn-warning btn-lg" %>
+            </div> -->
+
+        </div>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+<div class="row">
+    <%= will_paginate @cats, class: "apple_pagination" %>
+</div>
+
+<% elsif %>
+<div class="row">
+  <h1> Kedine bir arkadaş bul ! </h1>
+  <div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Login</h3>
+		 	</div>
+      <div class="panel-body">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "youremail@example.com", required: true%>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password", required: true %>
+          </div>
+
+          <% if devise_mapping.rememberable? -%>
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          <% end -%>
+          <%= f.submit "Log in" , class: 'btn btn-lg btn-success btn-block'%>
+          <h5> or </h5>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+<!-- <p id="notice"><%= notice %></p> -->
+
+<!-- <h1>Cats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Cat type</th>
+      <th>Location</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Color</th>
+      <th>Hyperactivity</th>
+      <th>health</th>
+      <th>About</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cats.each do |cat| %>
+      <tr>
+        <td><%= cat.user %></td>
+        <td><%= cat.cat_type %></td>
+        <td><%= cat.location %></td>
+        <td><%= cat.name %></td>
+        <td><%= cat.age %></td>
+        <td><%= cat.color %></td>
+        <td><%= cat.hyperactivity %></td>
+        <td><%= cat.health %></td>
+        <td><%= cat.about %></td>
+        <td><%= link_to 'Show', cat %></td>
+        <td><%= link_to 'Edit', edit_cat_path(cat) %></td>
+        <td><%= link_to 'Destroy', cat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cat', new_cat_path %> -->

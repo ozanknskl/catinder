@@ -1,0 +1,3 @@
+class CatType < ApplicationRecord
+  
+end

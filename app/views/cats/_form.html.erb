@@ -1,0 +1,110 @@
+<div class="col-md-8 col-md-offset-2 panel panel-body form-panel" >
+  <%= form_for @cat , html: {class: "form-horizontal"} do |f| %>
+    <fieldset>
+      <legend> Add a new cat </legend>
+
+      <% if cat.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</h2>
+
+          <ul>
+          <% cat.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <div class="col-md-3 col-md-offset-4 col-lg-5 " align="center">
+          <img alt="User Pic" src="https://static.vidivodo.com/vidivodo-videos/uploads/2016/6/17/7/287D60B81F0DAD36/1466150234gTh61226267-620x410jpg.jpg" class="img-circle img-responsive">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="Upload photo">Upload photo</label>
+        <div class="col-md-4">
+          <input id="Upload photo" name="Upload photo" class="input-file" type="file">
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :cat_type , class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.collection_select(:cat_type_id, CatType.all, :id, :name,{},{class: "form-control input-md select-class"})%>
+        </div>
+      </div>
+      <!-- <div class="col-md-2 hidden-xs">
+        <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
+      </div> -->
+      <div class="form-group">
+        <%= f.label :gender, class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.radio_button(:gender,1,class: "input-md") %>
+          <%= f.label(:gender,"Male") %>
+          <%= f.radio_button(:gender,2,class: "input-md") %>
+          <%= f.label(:gender,"Female") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :city, class: "col-md-4 control-label" %>
+        <div class="col-md-6">
+          <!-- <%#= collection_select(:locations, :location_id, @locations, :id, :city, class: "form-control input-md")%> -->
+          <%= f.collection_select(:location_id,Location.all, :id, :city_and_country , {}, {class: "form-control input-md select-class"})%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name , class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.text_field :name , class: "form-control input-md"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :age , class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.text_field :age , class: "form-control input-md"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :color , class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.text_field :color , class: "form-control input-md"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :hyperactivity , class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.radio_button(:hyperactivity,1,class: "input-md") %>
+          <%= f.label(:hyperactivity,"Low") %>
+          <%= f.radio_button(:hyperactivity,2,class: "input-md") %>
+          <%= f.label(:hyperactivity,"Middle") %>
+          <%= f.radio_button(:hyperactivity,3,class: "input-md") %>
+          <%= f.label(:hyperactivity,"High") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :health , class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.select(:health, options_for_select([["Unhealthy",1],["Not so healthy",2],["Average",3],["Just a few problems",4],["Perfect",5]]),{}, {class: "form-control input-md select-class"})%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :about , class: "col-md-4 control-label"%>
+        <div class="col-md-6">
+          <%= f.text_area(:about, rows: 7 , class: "form-control input-md")%>
+        </div>
+      </div>
+
+      <div class="form-group ">
+        <input type="submit" class='col-md-4 col-md-offset-5  btn btn-success' value="Create"/>
+      </div>
+      <%= link_to 'Back', cats_path ,class: "btn btn-info"%>
+
+    </fieldset>
+
+  <% end %>
+
+</div>

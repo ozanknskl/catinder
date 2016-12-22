@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  cat_type: one
+  location: one
+  name: MyString
+  age: 1
+  color: MyString
+  hyperactivity: 1
+  health: 1
+  about: MyText
+
+two:
+  user: two
+  cat_type: two
+  location: two
+  name: MyString
+  age: 1
+  color: MyString
+  hyperactivity: 1
+  health: 1
+  about: MyText

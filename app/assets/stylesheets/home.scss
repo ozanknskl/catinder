@@ -1,0 +1,35 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.row {
+
+}
+
+.row h1 {
+  text-align: center;
+  margin: 3%
+}
+
+.row h5 {
+  text-align: center;
+}
+
+body {
+  background: url('patiler3.png');
+}
+
+.select-class {
+    color: #5b9bd2 !important;
+    border: 2px solid !important;
+    height: 36px !important ;
+}
+
+.navbar-default{
+  background-color: #e4b7b7 !important;
+}
+
+.form-panel {
+    background-color: #e4b7b7 !important;
+    border: 2px solid #333333 !important;
+}
