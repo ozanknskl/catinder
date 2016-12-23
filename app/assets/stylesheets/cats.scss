@@ -5,12 +5,23 @@
   margin-top: 5%;
   margin-bottom: 2%;
 }
+
+.btn-chat{
+  background-color: #f73835;
+}
+.btn-chat:visited , .btn-chat:active {
+  color: #ffd252;
+}
+.btn-chat:hover , .btn-chat:active {
+  background-color: #a72321;
+  color: #ffd252 !important;
+}
 .h-divider{
  margin-top:20px;
  margin-bottom:20px;
  height:1px;
  width:100%;
- border-top:2px solid #e4b7b7 ;
+ border-top:2px solid #333333;
 }
 
 .cat-panel-body {
@@ -22,21 +33,31 @@
 }
 
 .panel{
-  border: 4px solid;
+  border: 4px solid !important;
   background-color: #c78a8a !important;
 }
 
 .main-panel{
   border-radius: 50% !important;
+  width: 500px;
+  height: 500px;
+}
+
+.mycats-panel-footer{
+  color: black;
 }
 
 .cat-panel-footer {
   height: 60px;
 }
 .cat-panel-link {
-  color:inherit;
+  color: #333333;
+  text-decoration: none !important;
 }
-.cat-panel-link:hover {
+.cat-panel-link:visited , .cat-panel-link:link{
+  color: #333333;
+}
+.cat-panel-link:hover , .cat-panel-link:active{
   color: #881c1c;
 }
 .apple_pagination {

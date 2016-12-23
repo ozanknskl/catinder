@@ -16,7 +16,7 @@
       <% end %>
       <div class="form-group">
         <div class="col-md-3 col-md-offset-4 col-lg-5 " align="center">
-          <img alt="User Pic" src="https://static.vidivodo.com/vidivodo-videos/uploads/2016/6/17/7/287D60B81F0DAD36/1466150234gTh61226267-620x410jpg.jpg" class="img-circle img-responsive">
+          <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="img-circle img-responsive">
         </div>
       </div>
       <div class="form-group">
@@ -87,7 +87,7 @@
       <div class="form-group">
         <%= f.label :health , class: "col-md-4 control-label"%>
         <div class="col-md-6">
-          <%= f.select(:health, options_for_select([["Unhealthy",1],["Not so healthy",2],["Average",3],["Just a few problems",4],["Perfect",5]]),{}, {class: "form-control input-md select-class"})%>
+          <%= f.select(:health, options_for_select(@cat_healths),{}, {class: "form-control input-md select-class"})%>
         </div>
       </div>
 

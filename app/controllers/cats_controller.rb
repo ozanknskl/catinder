@@ -5,7 +5,16 @@ class CatsController < ApplicationController
   # GET /cats
   # GET /cats.json
   def index
-    @cats = Cat.all.paginate(page: params[:page], per_page:4)
+    if current_user
+      @cats = Cat.where.not(user_id: current_user.id)
+                .paginate(page: params[:page], per_page:8)
+    else
+      @cats = Cat.all
+    end
+  end
+
+  def search
+    @cats = Cat.search(params[:search])
   end
 
   # GET /cats/1
@@ -17,6 +26,7 @@ class CatsController < ApplicationController
   def new
     @cat = Cat.new
     @locations = Location.all
+    @cat_healths = Cat::CAT_HEALTHS_ARR
   end
 
   # GET /cats/1/edit

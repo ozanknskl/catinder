@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get 'new_cat', to: 'cats#new'
   get 'cats', to: 'cat#index'
   get 'mycats', to: 'home#mycats'
+  get 'search', to: 'cats#search'
 end
