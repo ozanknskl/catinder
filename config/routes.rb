@@ -4,9 +4,14 @@ Rails.application.routes.draw do
   root 'cats#index'
 
   get 'about', to: 'home#about'
-  resources :cats
+  resources :cats do
+    member do
+      get 'like'
+    end
+  end
   get 'new_cat', to: 'cats#new'
   get 'cats', to: 'cat#index'
   get 'mycats', to: 'home#mycats'
   get 'search', to: 'cats#search'
+  get 'csearch', to: 'cats#custom_search'
 end

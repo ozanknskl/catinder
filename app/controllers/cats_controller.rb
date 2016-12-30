@@ -1,10 +1,12 @@
-class CatsController < ApplicationController
-  before_action :set_cat, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show, :index]
+require 'will_paginate/array'
 
+class CatsController < ApplicationController
+  before_action :set_cat, only: [:show, :edit, :update, :destroy, :like]
+  before_action :authenticate_user!, except: [:show, :index]
   # GET /cats
   # GET /cats.json
   def index
+
     if current_user
       @cats = Cat.where.not(user_id: current_user.id)
                 .paginate(page: params[:page], per_page:8)
@@ -14,7 +16,23 @@ class CatsController < ApplicationController
   end
 
   def search
-    @cats = Cat.search(params[:search])
+    if current_user
+      @cats = Cat.where.not(user_id: current_user.id).search(params[:search])
+                .paginate(page: params[:page], per_page:8)
+    end
+  end
+
+  def custom_search
+    if current_user
+      @cats = Cat.where.not(user_id: current_user.id).custom_search(
+        params[:hyperactivity],
+        params[:health],
+        params[:location_search],
+        params[:type_search],
+        params[:gender_id]
+        ).paginate(page: params[:page], per_page:8)
+    end
+    render :search
   end
 
   # GET /cats/1
@@ -31,6 +49,8 @@ class CatsController < ApplicationController
 
   # GET /cats/1/edit
   def edit
+
+    @cat_healths = Cat::CAT_HEALTHS_ARR
   end
 
   # POST /cats
@@ -43,7 +63,7 @@ class CatsController < ApplicationController
         format.html { redirect_to @cat, notice: 'Cat was successfully created.' }
         format.json { render :show, status: :created, location: @cat }
       else
-        format.html { render :new }
+        format.html { redirect_to new_cat_path }
         format.json { render json: @cat.errors, status: :unprocessable_entity }
       end
     end
@@ -52,14 +72,10 @@ class CatsController < ApplicationController
   # PATCH/PUT /cats/1
   # PATCH/PUT /cats/1.json
   def update
-    respond_to do |format|
-      if @cat.update(cat_params)
-        format.html { redirect_to @cat, notice: 'Cat was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cat }
-      else
-        format.html { render :edit }
-        format.json { render json: @cat.errors, status: :unprocessable_entity }
-      end
+    if @cat.update(cat_params)
+      redirect_to @cat, notice: 'Cat was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -73,6 +89,18 @@ class CatsController < ApplicationController
     end
   end
 
+  # def like
+  #   @cat
+  #   #old cat  liked
+  #   @new_cat = Cat.where('id > ?', @cat.id).first
+  #   render :cat
+  # end
+  #
+  # def dislike
+  #   puts params[:current_cat]
+  #   @cat = Cat.all[params[:current_cat] + 1]
+  # end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cat
@@ -81,6 +109,8 @@ class CatsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cat_params
-      params.require(:cat).permit(:user_id, :cat_type_id, :location_id, :name, :age, :color, :hyperactivity, :health, :about)
+      params.require(:cat).permit(:user_id, :cat_type_id, :location_id, :name,
+                                  :age, :color, :hyperactivity, :health, :about,
+                                  :image, :gender)
     end
 end

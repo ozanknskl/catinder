@@ -15,9 +15,22 @@
   text-align: center;
 }
 
+.advanced-search-panel .form-group{
+  margin-right: 1%;
+}
+
 body {
   background: url('patiler3.png');
   background-attachment: fixed;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
 }
 
 .select-class {

@@ -3,9 +3,13 @@ class Cat < ApplicationRecord
   belongs_to :cat_type
   belongs_to :location
 
-  validates :name, :color, :age, presence: true
+  validates :name, :color, :age, :user, :cat_type, :location, presence: true
 
   enum gender: [ :male, :female ]
+
+  has_attached_file :image, styles: { large: "350x350#", medium: "200x200>", small:"100x100>"}
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
 
   CAT_HEALTHS_ARR = [["Unhealthy",1],["Not so healthy",2],["Average",3],["Just a few problems",4],["Perfect",5]]
   # Cat healths
@@ -20,7 +24,24 @@ class Cat < ApplicationRecord
     type_cats = CatType.where("name ilike ?", "%#{search}%").collect(&:cats)
     location_cats = Location.where("country ilike ? or city ilike ?",
                                    "%#{search}%", "%#{search}%").collect(&:cats)
+    # gender_cats = where("gender ilike ?", "%#{search}%")
+
     result = name_cats + type_cats.flatten + location_cats.flatten
+    result.uniq
+  end
+
+  def self.custom_search(hyperactivity, health,location_search,type_search, gender_id)
+    #puts custom_search['gender']
+    # hyperactivity_cats = csearch['hyperactivity']
+    # health_cats = csearch['health']
+    gender_cats = (gender_id != "2") ? where("gender = #{gender_id}") : self.all
+    type_id = type_search.values[0].to_i
+    type_cats = !type_search.values[0].blank? ? CatType.where("id = #{type_id}").collect(&:cats).flatten : self.all
+    location_id = location_search.values[0].to_i
+    location_cats = !location_search.values[0].blank? ? Location.where("id = #{location_id}").collect(&:cats).flatten : self.all
+    hyperactivity_cats = (hyperactivity.to_i != 0) ? where("hyperactivity = #{hyperactivity}") : self.all
+    health_cats = (health.to_i != 0) ? where("health = #{health}") : self.all
+    result =  location_cats & hyperactivity_cats & health_cats & type_cats & gender_cats
     result.uniq
   end
 
@@ -35,7 +56,7 @@ class Cat < ApplicationRecord
   end
 
   def show_gender
-    if gender == 1
+    if gender == "male"
       "Male"
     else
       "Female"

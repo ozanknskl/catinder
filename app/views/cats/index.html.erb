@@ -2,21 +2,37 @@
   <% @cats.each do |cat| %>
     <% if(cat.user != current_user ) %>
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <%=link_to cat , class: "cat-panel-link"  do %>
-          <div class="panel panel-default cat-panel main-panel" >
+        <div class="col-md-3"> </div>
+        <div class=" col-md-6">
+          <%=link_to cat , class: "cat-panel-link "  do %>
+          <div class="panel panel-default cat-panel main-panel center-block" >
           <!-- <div class="panel-heading">
             <h3 class="panel-title"><%= cat.name + " - " + cat.location.city_and_country %></h3>
           </div> -->
             <div class="panel-body cat-panel-body">
               <div class="col-md-6 col-md-offset-3">
-                <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="cat-picture img-responsive img-circle ">
+                <% if cat.image_file_name %>
+                  <%= image_tag cat.image.url(:medium) , class: "object-fit_contain_medium cat-picture img-circle"%>
+                <% elsif %>
+                  <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="cat-picture img-responsive img-circle ">
+                <% end %>
               </div>
-              <div class="col-md-12 text-center">
-                <h2> <%= cat.name  %> </h2>
+              <div class="col-md-12">
+                <div class="col-md-3 col-xs-3">
+                  <button type="button" class="btn btn-danger btn-circle btn-xl center-block"><i class="glyphicon glyphicon-remove"></i></button>
+                </div>
+                <div class="col-md-6 col-xs-6 text-center">
+                  <h2> <%= cat.name  %> </h2>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                  <button type="button" class="btn btn-success btn-circle btn-xl center-block"><i class="glyphicon glyphicon-heart"></i></button>
+                  
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 text-center">
                 <div class="h-divider"></div>
                 <h3>  <%= cat.cat_type.name %>   </h3>
-                <h3>  <%= cat.age.to_s + " - " + cat.show_gender %> </h3>
+                <h3>  <%= cat.age.to_s + " - " + cat.gender %> </h3>
                 <h3>  <%= cat.location.city_and_country %> </h3>
               </div>
             </div>

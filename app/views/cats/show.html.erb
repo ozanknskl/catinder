@@ -6,8 +6,13 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <img alt="User Picture" src="http://a3.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE5NTU2MzE2NDk2OTU0ODkx.jpg" class="img-circle img-responsive">
+          <div class="col-md-6 col-md-offset-3 ">
+            <% if @cat.image_file_name %>
+              <%= image_tag @cat.image.url(:large) , class: "object-fit_contain_large img-circle"%>
+            <% elsif %>
+
+              <img alt="User Picture" src="http://a3.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE5NTU2MzE2NDk2OTU0ODkx.jpg" class="img-circle img-responsive">
+            <% end %>
           </div>
         </div>
         <div class="col-md-3"></div>
@@ -15,7 +20,7 @@
           <h4> <label>Type: </label> <%= @cat.cat_type.name %> </h4>
         </div>
         <div class="row text-center">
-          <h4> <label>Gender: </label> <%= @cat.show_gender %> </h4>
+          <h4> <label>Gender: </label> <%= @cat.gender %> </h4>
         </div>
         <div class="row text-center">
           <h4> <label>Location: </label> <%= @cat.location.city_and_country %> </h4>
@@ -39,10 +44,19 @@
           <h4> <label>About: </label> <%= @cat.about %> </h4>
         </div>
       </div>
-      <div class="panel-footer text-center">
-        <img alt="Fire Emoji" src="http://emojipedia-us.s3.amazonaws.com/cache/a8/1c/a81c380b4066b24f707d6d52c0270bd0.png" , width="30", height="30">
-        <%= link_to 'Start a chat with this cat' ,'/' , class: "btn btn-chat" %>
-        <img alt="Fire Emoji" src="http://emojipedia-us.s3.amazonaws.com/cache/a8/1c/a81c380b4066b24f707d6d52c0270bd0.png" , width="30", height="30">
+      <div class="panel-footer panel-footer-showcat text-center">
+        <% if !current_user.cats.include?(@cat) %>
+          <div class="col-md-6 col-xs-6 text-center">
+          <!-- <img alt="Fire Emoji" src="http://emojipedia-us.s3.amazonaws.com/cache/a8/1c/a81c380b4066b24f707d6d52c0270bd0.png" , width="30", height="30"> -->
+            <button type="button" class="btn btn-danger btn-circle btn-xl"><i class="glyphicon glyphicon-remove"></i></button>
+          <!-- <img alt="Fire Emoji" src="http://emojipedia-us.s3.amazonaws.com/cache/a8/1c/a81c380b4066b24f707d6d52c0270bd0.png" , width="30", height="30"> -->
+          </div>
+          <div class="col-md-6 col-xs-6 text-center">
+            <button type="button" class="btn btn-success btn-circle btn-xl"><i class="glyphicon glyphicon-heart"></i></button>
+          </div>
+        <% elsif %>
+          <%= link_to 'Edit Details' , edit_cat_path , class: "btn btn-info" %>
+        <% end %>
       </div>
     </div>
   </div>

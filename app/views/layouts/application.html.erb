@@ -38,6 +38,14 @@
             </div>
             <button type="submit" class="btn btn-default">Search</button>
           <% end %>
+
+          <!-- Advanced Search Button -->
+          <button type="button" class="btn btn-default navbar-btn" data-toggle="collapse" data-target="#filter-panel">
+            <span class="glyphicon glyphicon-cog"></span> Advanced Search
+          </button>
+
+
+          <!-- Show user options if logged in -->
           <% if current_user %>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
@@ -53,11 +61,70 @@
               </li>
             </ul>
           <% end %>
+
+          <!-- Advanced Search Functionality -->
+
+          <div id="filter-panel" class="collapse filter-panel">
+            <div class="panel panel-default">
+              <div class="panel-body advanced-search-panel">
+                <%= form_tag(csearch_path, method: "get", class: "form-inline") do %>
+                  <div class="form-group">
+                    <label> Gender: </label>
+                    <% options = options_for_select(
+                      [
+                        ['Please select',2],
+                        ['Male',0],
+                        ['Female',1]
+                      ],params[:gender_id]
+                    )%>
+                    <%= select_tag(:gender_id, options)%>
+                  </div>
+                  <div class="form-group">
+                    <label> Location: </label>
+                    <!-- <% selected_value = params[:location_search] ? params[:location_search].values[0].to_i : "Please Select" %> -->
+                    <%= collection_select(:location_search ,:location_id, Location.all, :id, :city_and_country , prompt: true)%>
+                  </div>
+                  <div class="form-group">
+                    <label> Type: </label>
+                    <!-- <% selected_value = params[:type_search] ? params[:type_search].values[0].to_i : ""  %> -->
+                    <%= collection_select(:type_search ,:cat_type_id, CatType.all, :id, :name ,prompt: true)%>
+                  </div>
+                  <div class="form-group">
+                    <label> Hyperactivity: </label>
+                    <% options = options_for_select(
+                      [
+                        ['Please select'],
+                        ['Low',1],
+                        ['Medium',2],
+                        ['High',3]
+                      ],params[:hyperactivity]
+                    )%>
+                    <%= select_tag(:hyperactivity,options )%>
+                  </div>
+                  <div class="form-group">
+                    <label> Health: </label>
+                    <%
+                       options = options_for_select(
+                         Cat::CAT_HEALTHS_ARR,
+                         params[:health]
+                       )%>
+                    <%= select_tag(:health, options, {prompt: 'Please Select'})%>
+                  </div>
+                  <button type="submit" class="btn btn-default">Search</button>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+
     <div class="container">
       <%= yield %>
     </div>
   </body>
 </html>
+<script>
+</script>

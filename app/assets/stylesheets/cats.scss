@@ -6,6 +6,27 @@
   margin-bottom: 2%;
 }
 
+.panel-footer-showcat{
+  height: 85px;
+}
+
+.object-fit_contain_large {
+  object-fit: cover;
+  width: 341px;
+  height: 341px;
+}
+.object-fit_contain_medium {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+.object-fit_contain_mycats {
+  object-fit: cover;
+  width: 312px;
+  height: 312px;
+}
+
 .btn-chat{
   background-color: #f73835;
 }
