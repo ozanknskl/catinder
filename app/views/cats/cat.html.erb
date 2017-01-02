@@ -16,7 +16,9 @@
         </div>
         <div class="col-md-12">
           <div class="col-md-3 col-xs-3">
-            <button type="button" class="btn btn-danger btn-circle btn-xl center-block"><i class="glyphicon glyphicon-remove"></i></button>
+            <%= link_to dislike_cat_path(@new_cat), class: "btn btn-danger btn-circle btn-xl center-block" do %>
+              <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
           </div>
           <div class="col-md-6 col-xs-6 text-center">
             <h2> <%= @new_cat.name  %> </h2>

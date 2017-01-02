@@ -9,6 +9,13 @@ Rails.application.routes.draw do
       get 'like'
     end
   end
+
+  resources :cats do
+    member do
+      get 'dislike'
+    end
+  end
+
   get 'new_cat', to: 'cats#new'
   get 'cats', to: 'cat#index'
   get 'mycats', to: 'home#mycats'

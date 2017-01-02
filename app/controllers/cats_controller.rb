@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 
 class CatsController < ApplicationController
-  before_action :set_cat, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_cat, only: [:show, :edit, :update, :destroy, :like, :dislike]
   before_action :authenticate_user!, except: [:show, :index]
   # GET /cats
   # GET /cats.json
@@ -89,17 +89,18 @@ class CatsController < ApplicationController
     end
   end
 
-  # def like
-  #   @cat
-  #   #old cat  liked
-  #   @new_cat = Cat.where('id > ?', @cat.id).first
-  #   render :cat
-  # end
-  #
-  # def dislike
-  #   puts params[:current_cat]
-  #   @cat = Cat.all[params[:current_cat] + 1]
-  # end
+  def like
+    @cat
+    #old cat  liked
+    @new_cat = Cat.where('id > ?', @cat.id).first
+    render :cat
+  end
+
+  def dislike
+
+    @new_cat = Cat.where('id > ?', @cat.id).first
+    render :cat
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
