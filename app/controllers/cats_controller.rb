@@ -90,15 +90,58 @@ class CatsController < ApplicationController
   end
 
   def like
-    @cat
+    liked_cat_ids = []
+    unless Like.where(user: current_user, cat: @cat).present?
+      @like = Like.new
+      @like.user = current_user
+      @like.cat = @cat
+      @like.status = true
+      @like.save
+
+      liked_cat_ids = current_user.likes.pluck(:cat_id)
+
+    end
+
     #old cat  liked
-    @new_cat = Cat.where('id > ?', @cat.id).first
+    i = 0
+    cat_number = Cat.where.not(user: current_user).size
+    while i < cat_number do
+      i += 1
+      all_cat_ids = Cat.where.not(user: current_user).pluck(:id)
+      random_cat_id = (all_cat_ids - liked_cat_ids).sample
+      @new_cat = Cat.where(id: random_cat_id).first
+      Like.exists?(cat_id: random_cat_id, user_id: current_user.id) ? (@new_cat = nil) : break
+    end
     render :cat
   end
 
   def dislike
+    liked_cat_ids = []
+    unless Like.where(user: current_user, cat: @cat).present?
+      @like = Like.new
+      @like.user = current_user
+      @like.cat = @cat
+      @like.status = false
+      @like.save
 
-    @new_cat = Cat.where('id > ?', @cat.id).first
+      liked_cat_ids = current_user.likes.pluck(:cat_id)
+
+    end
+
+    # loop do
+    #   @new_cat = Cat.where.not(user: current_user).order("RANDOM()").first
+    #   break unless Like.exists?(cat_id: @new_cat.id, user_id: current_user.id)
+    # end
+    
+    i = 0
+    cat_number = Cat.where.not(user: current_user).size
+    while i < cat_number do
+      i += 1
+      all_cat_ids = Cat.where.not(user: current_user).pluck(:id)
+      random_cat_id = (all_cat_ids - liked_cat_ids).sample
+      @new_cat = Cat.where(id: random_cat_id).first
+      Like.exists?(cat_id: random_cat_id, user_id: current_user.id) ? (@new_cat = nil) : break
+    end
     render :cat
   end
 

@@ -3,6 +3,8 @@ class Cat < ApplicationRecord
   belongs_to :cat_type
   belongs_to :location
 
+  has_many :likes
+
   validates :name, :color, :age, :user, :cat_type, :location, presence: true
 
   enum gender: [ :male, :female ]
