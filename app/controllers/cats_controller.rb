@@ -8,8 +8,21 @@ class CatsController < ApplicationController
   def index
 
     if current_user
-      @cats = Cat.where.not(user_id: current_user.id)
-                .paginate(page: params[:page], per_page:8)
+      # @cats = Cat.where.not(user_id: current_user.id)
+      #           .paginate(page: params[:page], per_page:8)
+
+      liked_cat_ids = current_user.likes.pluck(:cat_id)
+
+      i = 0
+      cat_number = Cat.where.not(user: current_user).size
+      while i < cat_number do
+        i += 1
+        all_cat_ids = Cat.where.not(user: current_user).pluck(:id)
+        random_cat_id = (all_cat_ids - liked_cat_ids).sample
+        @new_cat = Cat.where(id: random_cat_id).first
+        Like.exists?(cat_id: random_cat_id, user_id: current_user.id) ? (@new_cat = nil) : break
+      end
+      render :cat
     else
       @cats = Cat.all
     end
@@ -18,7 +31,19 @@ class CatsController < ApplicationController
   def search
     if current_user
       @cats = Cat.where.not(user_id: current_user.id).search(params[:search])
-                .paginate(page: params[:page], per_page:8)
+
+      liked_cat_ids = current_user.likes.pluck(:cat_id)
+
+      i = 0
+      cat_number = @cats.size
+      while i < cat_number do
+        i += 1
+        all_cat_ids = @cats.pluck(:id)
+        random_cat_id = (all_cat_ids - liked_cat_ids).sample
+        @new_cat = Cat.where(id: random_cat_id).first
+        Like.exists?(cat_id: random_cat_id, user_id: current_user.id) ? (@new_cat = nil) : break
+      end
+      render :cat
     end
   end
 
@@ -45,11 +70,12 @@ class CatsController < ApplicationController
     @cat = Cat.new
     @locations = Location.all
     @cat_healths = Cat::CAT_HEALTHS_ARR
+    @panel_title = "Add a new cat"
   end
 
   # GET /cats/1/edit
   def edit
-
+    @panel_title = "Edit your cat"
     @cat_healths = Cat::CAT_HEALTHS_ARR
   end
 
@@ -132,7 +158,7 @@ class CatsController < ApplicationController
     #   @new_cat = Cat.where.not(user: current_user).order("RANDOM()").first
     #   break unless Like.exists?(cat_id: @new_cat.id, user_id: current_user.id)
     # end
-    
+
     i = 0
     cat_number = Cat.where.not(user: current_user).size
     while i < cat_number do

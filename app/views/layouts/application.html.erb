@@ -48,10 +48,11 @@
           <!-- Show user options if logged in -->
           <% if current_user %>
             <ul class="nav navbar-nav navbar-right">
+              <li><a href="/conversations"> <i class="glyphicon glyphicon-inbox"></i></a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Profile</a></li>
+                  <li><a href="/profile">Profile</a></li>
                   <li><a href="/new_cat">New Cat</a></li>
                   <li><a href="/mycats">My Cats</a></li>
                   <li><a href="#">Settings</a></li>

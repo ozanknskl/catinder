@@ -55,7 +55,9 @@
             <button type="button" class="btn btn-success btn-circle btn-xl"><i class="glyphicon glyphicon-heart"></i></button>
           </div>
         <% elsif %>
-          <%= link_to 'Edit Details' , edit_cat_path , class: "btn btn-info" %>
+          <%= link_to  edit_cat_path , class: "btn btn-warning btn-circle btn-xl"  do%>
+            <h4> Edit </h4>
+          <% end %>
         <% end %>
       </div>
     </div>

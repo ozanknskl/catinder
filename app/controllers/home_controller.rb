@@ -10,4 +10,8 @@ class HomeController < ApplicationController
   def mycats
     @cats = current_user.cats
   end
+
+  def profile
+    @user = current_user
+  end
 end

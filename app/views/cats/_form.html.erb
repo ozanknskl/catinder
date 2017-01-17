@@ -1,7 +1,7 @@
 <div class="col-md-8 col-md-offset-2 panel panel-body form-panel" >
   <%= form_for @cat , html: {class: "form-horizontal", multipart: true} do |f| %>
     <fieldset>
-      <legend> Add a new cat </legend>
+      <legend> <%= @panel_title %> </legend>
 
       <% if cat.errors.any? %>
         <div id="error_explanation">
@@ -16,7 +16,11 @@
       <% end %>
       <div class="form-group">
         <div class="col-md-3 col-md-offset-4 col-lg-5 " align="center">
-          <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="img-circle img-responsive">
+          <% if cat.image_file_name %>
+            <%= image_tag cat.image.url(:medium) , class: "object-fit_contain_medium cat-picture img-circle"%>
+          <% elsif %>
+            <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="img-circle img-responsive">
+          <% end %>
         </div>
       </div>
       <div class="form-group">

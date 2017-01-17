@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+
+
+    <h1 class="inline">Your conversations
+      <%= link_to messages_path, class:"btn btn-xl btn-circle btn-info" do %>
+        <i class="glyphicon glyphicon-pencil" style="margin-top: 7px"></i>
+      <% end %>
+    </h1>
+  </div>
+    <div id="conversations">
+      <%= render @conversations %>
+    </div>
+  </div>
+</div>

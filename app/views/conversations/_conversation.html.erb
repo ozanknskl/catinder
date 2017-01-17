@@ -1,0 +1,8 @@
+<div class="col-md-6 col-md-offset-3">
+  Chatting with <%= conversation.with(current_user).full_name %>
+  <br>
+  <em><%= conversation.messages.last.body.truncate(50) %></em>
+  <br>
+  <%= link_to 'View conversation', conversation_path(conversation) %>
+  <hr>
+</div>
