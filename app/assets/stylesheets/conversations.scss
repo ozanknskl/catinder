@@ -1,0 +1,41 @@
+#new_message {
+  width: 100%;
+}
+
+#conversation:active , #conversation:hover {
+  background: #ce7a7a;
+}
+
+.conversation_link{
+  text-decoration: none;
+  color: initial;
+}
+
+.vertical-line {
+  height: calc(100vh - 180px);
+}
+
+#conversation a:hover , #conversation a:active{
+  color:initial;
+  text-decoration: none;
+}
+
+#conversation {
+  padding: 10px;
+  border-radius: 20px;
+}
+
+hr {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+.conversation-info {
+  padding-left: 80px;
+}
+
+.conversation-avatar {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  padding-top: 10px;
+}

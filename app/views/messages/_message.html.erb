@@ -1,4 +1,36 @@
-<p><%= message.body %></p>
-<p>at <strong><%= message.created_at %></strong><br>
-  by <strong><%= message.user.full_name %></strong></p>
-<hr>
+<% if  message.user == current_user %>
+<% answer = "answer-right" %>
+<% cat = current_user.cats[0]%>
+<% else %>
+<% answer = "answer-left" %>
+<% cat = message.conversation.receiver.cats[0] %>
+<% end %>
+<div class="row">
+  <div class=" <%= answer %>">
+    <div class="avatar">
+      <% if cat.image_file_name %>
+        <%= image_tag cat.image.url(:small) , class: "img-avatar img-circle"%>
+      <% elsif %>
+        <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="img-avatar img-responsive img-circle " width="100px" height="100px">
+      <% end %>
+    </div>
+    <!-- <div class="name">
+      <strong><%= message.user.full_name %></strong>
+    </div> -->
+    <div class="message-text">
+      <%= message.body %>
+    </div>
+
+    <% time = message.created_at %>
+    <% if time %>
+      <div class="time">
+        <% if time.day == Time.now.day %>
+          <%= time.in_time_zone("Baghdad").to_s(:time) %>
+        <% else %>
+          <%= time.in_time_zone("Baghdad").to_s(:short) %>
+        <% end %>
+      </div>
+    <% end %>
+    <!-- <hr> -->
+  </div>
+</div>

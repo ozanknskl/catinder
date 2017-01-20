@@ -47,12 +47,14 @@
       <div class="panel-footer panel-footer-showcat text-center">
         <% if !current_user.cats.include?(@cat) %>
           <div class="col-md-6 col-xs-6 text-center">
-          <!-- <img alt="Fire Emoji" src="http://emojipedia-us.s3.amazonaws.com/cache/a8/1c/a81c380b4066b24f707d6d52c0270bd0.png" , width="30", height="30"> -->
-            <button type="button" class="btn btn-danger btn-circle btn-xl"><i class="glyphicon glyphicon-remove"></i></button>
-          <!-- <img alt="Fire Emoji" src="http://emojipedia-us.s3.amazonaws.com/cache/a8/1c/a81c380b4066b24f707d6d52c0270bd0.png" , width="30", height="30"> -->
+          <%= link_to dislike_cat_path(@cat), class: "btn btn-danger btn-circle btn-xl center-block" do %>
+            <i class="glyphicon glyphicon-remove", style="top : 13px"></i>
+          <% end %>
           </div>
           <div class="col-md-6 col-xs-6 text-center">
-            <button type="button" class="btn btn-success btn-circle btn-xl"><i class="glyphicon glyphicon-heart"></i></button>
+            <%= link_to like_cat_path(@cat) , class: 'btn btn-success btn-circle btn-xl center-block' do %>
+              <i class="glyphicon glyphicon-heart", style="top : 13px"></i>
+            <% end %>
           </div>
         <% elsif %>
           <%= link_to  edit_cat_path , class: "btn btn-warning btn-circle btn-xl"  do%>

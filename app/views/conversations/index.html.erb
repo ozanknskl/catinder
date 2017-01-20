@@ -1,16 +1,33 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-8 col-md-offset-2">
     <div class="row">
-
-
-    <h1 class="inline">Your conversations
-      <%= link_to messages_path, class:"btn btn-xl btn-circle btn-info" do %>
-        <i class="glyphicon glyphicon-pencil" style="margin-top: 7px"></i>
-      <% end %>
-    </h1>
-  </div>
-    <div id="conversations">
-      <%= render @conversations %>
+      <div class="col-md-9">
+        <h1>Conversations </h1>
+      </div>
+      <div class="col-md-3">
+        <button onclick= "showUsers()" class="center-block btn btn-xl btn-circle btn-info">
+          <i class="glyphicon glyphicon-pencil" style="margin-top: 7px"></i>
+        </button>
+      </div>
     </div>
+    <div class="well">
+      <div class="col-md-8" id="conversations">
+        <%= render @conversations %>
+      </div>
+      <div class="col-md-1">
+        <div class="vertical-line" style="border-left: 2px solid #000; height: 500px; "></div>
+      </div>
+      <div class="col-md-3" id="hidden_users" style="display: none">
+        <li><%= link_to @users[0].full_name, new_message_path(receiver_id: @users[0].id) %></li>
+        <li><%= @users[1].full_name %></li>
+        <li><%= @users[2].full_name %></li>
+      </div>
+  </div>
   </div>
 </div>
+
+<script>
+  function showUsers() {
+    $("#hidden_users").toggle();
+  }
+</script>

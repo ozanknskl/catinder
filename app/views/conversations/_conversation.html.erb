@@ -1,8 +1,18 @@
-<div class="col-md-6 col-md-offset-3">
-  Chatting with <%= conversation.with(current_user).full_name %>
-  <br>
-  <em><%= conversation.messages.last.body.truncate(50) %></em>
-  <br>
-  <%= link_to 'View conversation', conversation_path(conversation) %>
-  <hr>
+<div id="conversation">
+  <%= link_to conversation_path(conversation), class:"conversation_link" do %>
+    <div class="conversation-avatar">
+      <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="img-avatar img-responsive img-circle " width="100px" height="100px">
+    </div>
+    <div class="conversation-info">
+      <h3><%= conversation.with(current_user).full_name %></h3>
+      <% last_user = conversation.messages.last.user %>
+      <p>
+        <% if last_user == current_user %>
+          You:
+        <% end %>
+        <em> <%= conversation.messages.last.body.truncate(40) %></em>
+      </p>
+    </div>
+  <% end %>
 </div>
+<hr>

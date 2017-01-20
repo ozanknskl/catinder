@@ -17,24 +17,24 @@ class MessagesController < ApplicationController
     @message = current_user.messages.build
   end
 
-  def index
+  def availableusers
     @availableusers = User.all
   end
 
   private
 
-  def message_params
-    params.require(:message).permit(:body)
-  end
+    def message_params
+      params.require(:message).permit(:body)
+    end
 
-  def find_conversation!
-  if params[:receiver_id]
-    @receiver = User.find(params[:receiver_id])
-    redirect_to(conversations_path) and return unless @receiver
-    @conversation = Conversation.between(current_user.id, @receiver.id)[0]
-  else
-    @conversation = Conversation.find(params[:conversation_id])
-    redirect_to(conversations_path) and return unless @conversation && @conversation.participates?(current_user)
+    def find_conversation!
+    if params[:receiver_id]
+      @receiver = User.find(params[:receiver_id])
+      redirect_to(conversations_path) and return unless @receiver
+      @conversation = Conversation.between(current_user.id, @receiver.id)[0]
+    else
+      @conversation = Conversation.find(params[:conversation_id])
+      redirect_to(conversations_path) and return unless @conversation && @conversation.participates?(current_user)
+    end
   end
-end
 end

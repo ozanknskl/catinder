@@ -1,15 +1,71 @@
-<h1>Chatting with <%= @conversation.with(current_user).full_name %></h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Chatting with <%= @conversation.with(current_user).full_name %></h1>
+    <div class="well">
+      <div id="conversation-main">
+        <div id="conversation-body">
+          <% @messages_array.each do |message_hash| %>
+            <%#= render message %>
 
-<div id="conversation-main">
-  <div id="conversation-body">
-    <%= render @conversation.messages %>
+            <% if  message_hash[:user] == current_user %>
+            <% answer = "answer-right" %>
+            <% cat = current_user.cats[0]%>
+            <% else %>
+            <% answer = "answer-left" %>
+            <% cat = @conversation.receiver.cats[0] %>
+            <% end %>
+            <div class="row">
+              <div class=" <%= answer %>">
+                <div class="avatar">
+                  <% if cat.image_file_name %>
+                    <%= image_tag cat.image.url(:small) , class: "img-avatar img-circle"%>
+                  <% elsif %>
+                    <img alt="User Pic" src="https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg" class="img-avatar img-responsive img-circle " width="100px" height="100px">
+                  <% end %>
+                </div>
+
+
+                <% message_hash[:contents].each_with_index do |content, index| %>
+                  <%if index == (message_hash[:contents].size - 1) %>
+                    <div class="message-text message-text-last">
+                      <%= content %>
+                    </div>
+                    <div class="time">
+                      <% time = message_hash[:created_at] %>
+                      <% if time.day == Time.now.day %>
+                        <%= time.in_time_zone("Baghdad").to_s(:time) %>
+                      <% else %>
+                        <%= time.in_time_zone("Baghdad").to_s(:short) %>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div class="message-text">
+                      <%= content %>
+                    </div>
+                  <% end %>
+                <% end %>
+
+
+
+                <!-- <hr> -->
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+        <hr>
+        <%= form_for @message do |f| %>
+          <%= hidden_field_tag 'conversation_id', @conversation.id %>
+          <%= f.text_area :body, class:"span4", id:"new_message",placeholder:"Type in your message", rows:"5" %>
+          <%= f.submit "Send" , class:"btn btn-info"%>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <%= form_for @message do |f| %>
-    <%= hidden_field_tag 'conversation_id', @conversation.id %>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-
-    <%= f.submit %>
-  <% end %>
 </div>
+
+<script>
+  $(function(){
+    $(".well").niceScroll();
+  })
+</script>
