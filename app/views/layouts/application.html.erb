@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cattinder</title>
+    <title>Catinder</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -56,6 +56,7 @@
                   <li><a href="/profile">Profile</a></li>
                   <li><a href="/new_cat">New Cat</a></li>
                   <li><a href="/mycats">My Cats</a></li>
+                  <li><a href="/favourites">Favourite Cats</a></li>
                   <li><a href="#">Settings</a></li>
                   <li role="separator" class="divider"></li>
                   <%= link_to('Log out', destroy_user_session_path, method: :delete, class: 'btn btn-block btn-danger') %>

@@ -27,7 +27,7 @@
   height: 312px;
 }
 
-.glyphicon {
+.white-glyphicon {
   color: white;
 }
 
@@ -85,6 +85,22 @@
 .cat-panel-link:hover , .cat-panel-link:active{
   color: #881c1c;
 }
+
+.image-div {
+  height: 350px;
+}
+
+// .helper {
+//    display: inline-block;
+//    height: 100%;
+//    vertical-align: middle;
+// }
+//
+.carousel-inner>.item>.image-div>img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 .apple_pagination {
   font-size: 17px;
   text-align: center;

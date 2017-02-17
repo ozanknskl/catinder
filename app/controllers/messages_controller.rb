@@ -8,6 +8,8 @@ class MessagesController < ApplicationController
     @message.conversation_id = @conversation.id
     @message.save!
 
+    @conversation.updated_at = Time.now
+    @conversation.save!
     flash[:success] = "Your message was sent!"
     redirect_to conversation_path(@conversation)
   end

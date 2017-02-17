@@ -1,26 +1,26 @@
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
     <div class="row">
-      <div class="col-md-9">
-        <h1>Conversations </h1>
+      <div class="col-md-9 col-xs-9">
+        <h3 style="margin-right: 2px;">Conversations </h1>
       </div>
-      <div class="col-md-3">
-        <button onclick= "showUsers()" class="center-block btn btn-xl btn-circle btn-info">
+      <div class="col-md-3 col-xs-3">
+        <button onclick= "showUsers()" class="center-block btn btn-xs btn-circle btn-info">
           <i class="glyphicon glyphicon-pencil" style="margin-top: 7px"></i>
         </button>
       </div>
     </div>
     <div class="well">
-      <div class="col-md-8" id="conversations">
+      <div class="col-md-8 col-xs-8" id="conversations">
         <%= render @conversations %>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-1 col-xs-1">
         <div class="vertical-line" style="border-left: 2px solid #000; height: 500px; "></div>
       </div>
-      <div class="col-md-3" id="hidden_users" style="display: none">
-        <li><%= link_to @users[0].full_name, new_message_path(receiver_id: @users[0].id) %></li>
-        <li><%= @users[1].full_name %></li>
-        <li><%= @users[2].full_name %></li>
+      <div class="col-md-3 col-xs-3" id="hidden_users" style="display: none">
+        <% @users.each do |user| %>
+          <li><%= link_to user.full_name, new_message_path(receiver_id: user.id) %></li>
+        <% end %>
       </div>
   </div>
   </div>

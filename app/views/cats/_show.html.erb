@@ -1,0 +1,96 @@
+<div class="panel-heading text-center">
+  <h2><%= cat.name %></h2>
+</div>
+<div class="panel-body">
+  <div class="row">
+      <div id="carousel_2" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <!-- <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+      </ol> -->
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner change-pictures" role="listbox">
+
+        <div class="item active">
+          <div class="image-div">
+            <img alt="User Picture" src="http://a3.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE5NTU2MzE2NDk2OTU0ODkx.jpg" class="center-block"/>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="image-div">
+            <img alt="Cat Picture" src="https://www.ruyatabirleri.com/wp-content/uploads/kedi-1.jpg" class="center-block" />
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="image-div">
+            <img alt="Cat Picture" src="http://www.kediler.gen.tr/images/en-guzel-kedi-isimleri.jpg" class="center-block"/>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="image-div">
+            <img alt="Cat Picture" src="https://static.vidivodo.com/vidivodo-videos/uploads/2016/6/17/7/287D60B81F0DAD36/1466150234gTh61226267-620x410jpg.jpg" class="center-block" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#carousel_2" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel_2" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+      <!-- <% if cat.image_file_name %>
+        <%= image_tag cat.image.url(:large) , class: "object-fit_contain_large img-circle"%>
+      <% elsif %>
+
+        <img alt="User Picture" src="http://a3.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE5NTU2MzE2NDk2OTU0ODkx.jpg" class="img-circle img-responsive">
+      <% end %> -->
+  </div>
+  <div class="row text-center">
+    <h4> <label>Type: </label> <%= cat.cat_type.name %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>Gender: </label> <%= cat.gender %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>Location: </label> <%= cat.location.city_and_country %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>Age: </label> <%= cat.age %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>Color: </label> <%= cat.color %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>Owner: </label> <%= cat.user.username %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>Hyperactivity: </label> <%= cat.show_hyperactivity %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>Health: </label> <%= cat.show_health %> </h4>
+  </div>
+  <div class="row text-center">
+    <h4> <label>About: </label> <%= cat.about %> </h4>
+  </div>
+</div>
+
+<script>
+$('#carousel_2').carousel({
+  interval: false
+});
+
+</script>

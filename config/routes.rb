@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages, only: [:create, :new] do 
+  resources :messages, only: [:create, :new] do
     get 'availableusers'
   end
   resources :conversations, only: [:index,:show]
@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   get 'search', to: 'cats#search'
   get 'csearch', to: 'cats#custom_search'
   get 'conversations', to: 'conversations#index'
+  get 'favourites' , to: 'home#favourites'
 end

@@ -5,7 +5,21 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = Conversation.participating(current_user).order('updated_at DESC')
-    @users = User.first(3)
+    @users = Set.new
+    user_set = Set.new
+    current_user.likes.each do |like|
+      liked_user = Cat.find(like.cat_id).user_id
+      user_set.add(liked_user)
+    end
+
+    user_set.each do |user|
+      User.find(user).likes.each do |like|
+        if current_user.id == Cat.find(like.cat_id).user_id
+          @users.add(User.find(user))
+        end
+      end
+    end
+
   end
 
   def show
